@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")    // Transaction Pooler
+  directUrl = env("DIRECT_URL")     // Direct Connection (마이그레이션용)
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  plan      Plan     @default(FREE)
+  createdAt DateTime @default(now())
+}
+
+enum Plan {
+  FREE
+  STANDARD
+  PRO
+}
+
+
+

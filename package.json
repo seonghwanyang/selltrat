@@ -1,0 +1,23 @@
+{
+  "name": "@selltrat/agent-runtime",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@langchain/langgraph": "^0.0.10",
+    "@langchain/openai": "^0.0.28",
+    "langchain": "^0.1.30",
+    "@selltrat/shared": "workspace:*"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
