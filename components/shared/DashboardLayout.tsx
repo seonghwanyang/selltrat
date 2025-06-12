@@ -1,23 +1,46 @@
 "use client";
 
 import React from "react";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
+  chatPanel?: React.ReactNode;
+  sidebarPanel?: React.ReactNode;
+  className?: string;
 }
 
-export function DashboardLayout({ children }: DashboardLayoutProps) {
+export function DashboardLayout({ 
+  children, 
+  chatPanel,
+  sidebarPanel,
+  className 
+}: DashboardLayoutProps) {
   return (
-    <div className="flex h-screen bg-gray-50">
-      {/* 사이드바 */}
-      <aside className="w-64 bg-white border-r">
-        <div className="p-4">
-          <h1 className="text-xl font-bold">Selltrat</h1>
-        </div>
-      </aside>
-
-      {/* 메인 콘텐츠 */}
-      <main className="flex-1 overflow-auto">{children}</main>
+    <div className={cn("flex h-screen bg-[#fafafa]", className)}>
+      {/* 좌측 채팅 패널 - 440px */}
+      {chatPanel && (
+        <aside className="w-[440px] bg-white border-r border-[#e5e5e5] flex flex-col">
+          {chatPanel}
+        </aside>
+      )}
+      
+      {/* 중앙 메인 콘텐츠 영역 */}
+      <main className="flex-1 flex flex-col overflow-hidden">
+        <ScrollArea className="flex-1">
+          <div className="p-6">
+            {children}
+          </div>
+        </ScrollArea>
+      </main>
+      
+      {/* 우측 사이드바 - 280px */}
+      {sidebarPanel && (
+        <aside className="w-[280px] flex flex-col gap-6 p-6">
+          {sidebarPanel}
+        </aside>
+      )}
     </div>
   );
 }
